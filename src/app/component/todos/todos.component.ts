@@ -25,17 +25,26 @@ export class TodosComponent implements OnInit {
 
         return value
       })
+
+      localStorage.setItem("todo", JSON.stringify(this.todos))
+
     }
 
     deleteTodo(id:number) {
       this.todos = this.todos.filter((v,i) => { return i !== id})
+
+      localStorage.setItem("todo", JSON.stringify(this.todos))
+
     }
 
     addTodo() {
-      this.todos.push({
-        content: this.inputTodo,
-        completed: false
-      })
+      if(this.inputTodo !== "") {
+
+        this.todos.push({
+          content: this.inputTodo,
+          completed: false
+        })
+      }
       localStorage.setItem("todo", JSON.stringify(this.todos))
       this.inputTodo = ''
     }
